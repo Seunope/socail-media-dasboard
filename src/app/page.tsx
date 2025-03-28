@@ -1,103 +1,124 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import ThemeToggle from "@/components/ThemeProvider";
+import {
+  PieChart,
+  Pie,
+  Tooltip,
+  Cell,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+} from "recharts";
+import { motion } from "framer-motion";
 
-export default function Home() {
+const dummyData = {
+  facebookComments: 1532,
+  instagramComments: 1217,
+  sentiments: [
+    { name: "Positive", value: 50, color: "#4CAF50" },
+    { name: "Neutral", value: 30, color: "#8884d8" },
+    { name: "Negative", value: 20, color: "#FF4D4D" },
+  ],
+  toxicity: [
+    { label: "Toxic", value: 72 },
+    { label: "Obscene", value: 18 },
+    { label: "Severe Toxic", value: 10 },
+  ],
+  trends: [
+    { day: 1, comments: 12 },
+    { day: 5, comments: 20 },
+    { day: 10, comments: 35 },
+    { day: 15, comments: 50 },
+    { day: 20, comments: 65 },
+    { day: 25, comments: 80 },
+    { day: 30, comments: 100 },
+  ],
+  keywords: [
+    "love",
+    "great",
+    "amazing",
+    "price",
+    "customer",
+    "recommend",
+    "support",
+    "service",
+    "best",
+  ],
+};
+
+export default function Dashboard() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="p-6 min-h-screen">
+      {/* Header */}
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Social Media Comment Analyzer</h1>
+        <ThemeToggle />
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        {/* Facebook & Instagram Comments */}
+        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+          <p className="font-semibold">FACEBOOK COMMENTS</p>
+          <p className="text-2xl">{dummyData.facebookComments}</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+          <p className="font-semibold">INSTAGRAM COMMENTS</p>
+          <p className="text-2xl">{dummyData.instagramComments}</p>
+        </div>
+
+        {/* Sentiment Analysis */}
+        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+          <h2 className="font-semibold mb-2">Sentiment Analysis</h2>
+          <PieChart width={300} height={200}>
+            <Pie
+              data={dummyData.sentiments}
+              dataKey="value"
+              cx="50%"
+              cy="50%"
+              outerRadius={60}
+            >
+              {dummyData.sentiments.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        </div>
+
+        {/* Toxicity Detection */}
+        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+          <h2 className="font-semibold">Toxicity Detection</h2>
+          {dummyData.toxicity.map((item, index) => (
+            <div key={index} className="mt-2">
+              <p>{item.label}</p>
+              <div className="w-full bg-gray-700 rounded-full h-2.5">
+                <motion.div
+                  className="bg-blue-500 h-2.5 rounded-full"
+                  style={{ width: `${item.value}%` }}
+                  initial={{ width: 0 }}
+                  animate={{ width: `${item.value}%` }}
+                  transition={{ duration: 0.5 }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Comment Trends */}
+        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+          <h2 className="font-semibold">Comment Trends</h2>
+          <LineChart width={300} height={200} data={dummyData.trends}>
+            <XAxis dataKey="day" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Line type="monotone" dataKey="comments" stroke="#4CAF50" />
+          </LineChart>
+        </div>
+      </div>
     </div>
   );
 }
