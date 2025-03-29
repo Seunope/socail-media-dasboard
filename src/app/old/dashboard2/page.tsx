@@ -1,13 +1,13 @@
 "use client";
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import AnalyticsCard from "@/components/ui/AnalyticsCard";
-import CommentTrendChart from "@/components/ui/CommentTrendChart";
-import KeywordCloud from "@/components/ui/KeywordCloud";
-import SentimentMeter from "@/components/ui/SentimentMeter";
-import ToxicityIndicator from "@/components/ui/ToxicityIndicator";
-import ExportButton from "@/components/ui/ExportButton";
-import LoadingSkeleton from "@/components/ui/LoadingSkeleton";
+import AnalyticsCard from "@/app/old/componentsold/ui/AnalyticsCard";
+import CommentTrendChart from "@/app/old/componentsold/ui/CommentTrendChart";
+import KeywordCloud from "@/app/old/componentsold/ui/KeywordCloud";
+import SentimentMeter from "@/app/old/componentsold/ui/SentimentMeter";
+import ToxicityIndicator from "@/app/old/componentsold/ui/ToxicityIndicator";
+import ExportButton from "@/app/old/componentsold/ui/ExportButton";
+import LoadingSkeleton from "@/app/old/componentsold/ui/LoadingSkeleton";
 
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);

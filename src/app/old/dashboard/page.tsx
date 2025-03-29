@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/app/old/componentsold/ui/card";
+import { Button } from "@/app/old/componentsold/ui/button";
 import {
   PieChart,
   Pie,

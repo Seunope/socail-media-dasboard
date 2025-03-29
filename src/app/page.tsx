@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import ThemeToggle from "@/components/ThemeProvider";
+import ThemeToggle from "@/app/old/componentsold/ThemeProvider";
 import {
   PieChart,
   Pie,
