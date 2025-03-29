@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { FaUserCircle } from "react-icons/fa";
 import { Suspense, useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,10 +11,21 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import RealTimeActivity from "@/components/dashboard/RealTimeActivity";
 import EngagementMetrics from "@/components/dashboard/EngagementMetrics";
 import CommentList from "@/components/dashboard/CommentList";
+import CommentTrendChart from "@/components/dashboard/CommentTrendChart";
 import { Skeleton } from "@/components/shared/Loading/Skeleton";
 import { toast } from "sonner";
 import ThemeToggle from "@/components/shared/ThemeToggle";
 import { Analyzer } from "@/components/dashboard/Analyzer";
+import ToxicityIndicator from "@/components/dashboard/ToxicityIndicator";
+import { useAuth } from "@/context/AuthContext";
+import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { redirect } from "next/navigation";
 
 const SentimentChart = dynamic(
   () => import("@/components/shared/Charts/SentimentChart"),
@@ -32,6 +44,8 @@ const KeywordCloud = dynamic(
 );
 
 export default function DashboardPage() {
+  const { user, logout } = useAuth();
+
   const handleExport = async (format: "pdf" | "csv" | "json") => {
     toast.promise(
       fetch("/api/export", {
@@ -79,17 +93,18 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 p-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h2 className="text-2xl font-bold tracking-tight">
             Social Media Analytics
-          </h1>
+          </h2>
           <p className="text-sm text-muted-foreground">
             Real-time sentiment analysis across platforms
           </p>
         </div>
-        <div className="flex gap-2">
+
+        <div className="flex gap-2 max-sm:hidden">
           <ThemeToggle />
           <Button variant="outline" onClick={() => handleExport("csv")}>
             <Icons.download className="mr-2 h-4 w-4" />
@@ -104,6 +119,28 @@ export default function DashboardPage() {
             JSON
           </Button>
         </div>
+        {user && (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-2">
+              <Avatar className="h-8 w-8">
+                <FaUserCircle className="text-2xl text-gray-700" />
+              </Avatar>
+              <div className="text-sm text-right">
+                <div className="font-medium">{user.name}</div>
+                <div className="text-xs text-muted-foreground capitalize">
+                  {user.role}
+                </div>
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => redirect("/settings")}>
+                Settings
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
 
       <Tabs defaultValue="overview" className="space-y-4">
@@ -112,7 +149,10 @@ export default function DashboardPage() {
           <TabsTrigger value="sentiment">Sentiment</TabsTrigger>
           <TabsTrigger value="comments">Comments</TabsTrigger>
           <TabsTrigger value="realtime">Real-time</TabsTrigger>
-          <TabsTrigger value="analysis">AI Analysis</TabsTrigger>
+
+          <TabsTrigger value="analysis" className=" max-sm:hidden">
+            AI Analysis
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
@@ -167,9 +207,31 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
           </div>
+          {/* <div className="h-64">
+            <ToxicityIndicator
+              levels={[72, 18, 10]}
+              scores={[0.92, 0.85, 0.8]}
+            />
+          </div> */}
         </TabsContent>
 
         <TabsContent value="comments">
+          <Card>
+            <CardHeader>
+              <CardTitle>Comment Trends</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ScrollArea className="h-[180px]">
+                <Suspense fallback={<CommentList.Skeleton />}>
+                  <CommentTrendChart
+                    darkMode={true}
+                    data={[10, 5, 12, 19, 26, 24, 31]}
+                  />
+                </Suspense>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle>Recent Comments</CardTitle>
