@@ -8,7 +8,13 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}", // For Next.js 13+ app directory
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        // Add other semantic colors as needed
+      },
+    },
   },
   plugins: [],
 };

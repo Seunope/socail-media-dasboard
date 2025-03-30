@@ -1,124 +1,100 @@
-"use client";
-import { useState } from "react";
-import ThemeToggle from "@/components/ThemeProvider";
-import {
-  PieChart,
-  Pie,
-  Tooltip,
-  Cell,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from "recharts";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Icons } from "@/components/ui/icons";
 
-const dummyData = {
-  facebookComments: 1532,
-  instagramComments: 1217,
-  sentiments: [
-    { name: "Positive", value: 50, color: "#4CAF50" },
-    { name: "Neutral", value: 30, color: "#8884d8" },
-    { name: "Negative", value: 20, color: "#FF4D4D" },
-  ],
-  toxicity: [
-    { label: "Toxic", value: 72 },
-    { label: "Obscene", value: 18 },
-    { label: "Severe Toxic", value: 10 },
-  ],
-  trends: [
-    { day: 1, comments: 12 },
-    { day: 5, comments: 20 },
-    { day: 10, comments: 35 },
-    { day: 15, comments: 50 },
-    { day: 20, comments: 65 },
-    { day: 25, comments: 80 },
-    { day: 30, comments: 100 },
-  ],
-  keywords: [
-    "love",
-    "great",
-    "amazing",
-    "price",
-    "customer",
-    "recommend",
-    "support",
-    "service",
-    "best",
-  ],
-};
-
-export default function Dashboard() {
+export default function Home() {
   return (
-    <div className="p-6 min-h-screen">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Social Media Comment Analyzer</h1>
-        <ThemeToggle />
-      </div>
-
-      {/* Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-        {/* Facebook & Instagram Comments */}
-        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <p className="font-semibold">FACEBOOK COMMENTS</p>
-          <p className="text-2xl">{dummyData.facebookComments}</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
+      <header className="container mx-auto py-6">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Icons.logo className="h-8 w-8" />
+            <span className="text-xl font-bold">SocialSentinel</span>
+          </div>
+          <div className="flex gap-4">
+            <Button variant="outline" asChild>
+              <Link href="/login">Login</Link>
+            </Button>
+            <Button asChild>
+              <Link href="/signup">Sign Up</Link>
+            </Button>
+          </div>
         </div>
-        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <p className="font-semibold">INSTAGRAM COMMENTS</p>
-          <p className="text-2xl">{dummyData.instagramComments}</p>
-        </div>
+      </header>
 
-        {/* Sentiment Analysis */}
-        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <h2 className="font-semibold mb-2">Sentiment Analysis</h2>
-          <PieChart width={300} height={200}>
-            <Pie
-              data={dummyData.sentiments}
-              dataKey="value"
-              cx="50%"
-              cy="50%"
-              outerRadius={60}
-            >
-              {dummyData.sentiments.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </div>
-
-        {/* Toxicity Detection */}
-        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <h2 className="font-semibold">Toxicity Detection</h2>
-          {dummyData.toxicity.map((item, index) => (
-            <div key={index} className="mt-2">
-              <p>{item.label}</p>
-              <div className="w-full bg-gray-700 rounded-full h-2.5">
-                <motion.div
-                  className="bg-blue-500 h-2.5 rounded-full"
-                  style={{ width: `${item.value}%` }}
-                  initial={{ width: 0 }}
-                  animate={{ width: `${item.value}%` }}
-                  transition={{ duration: 0.5 }}
-                />
+      <main className="container mx-auto py-12">
+        <section className="flex flex-col md:flex-row gap-8 items-center">
+          <div className="md:w-1/2 space-y-6">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+              Analyze Social Media Sentiment with AI
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Get real-time insights from customer feedback across all platforms
+              with our powerful sentiment analysis dashboard.
+            </p>
+            <div className="flex gap-4">
+              <Button asChild>
+                <Link href="/signup">Get Started</Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href="#features">Learn More</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="md:w-1/2">
+            <div className="bg-white p-2 rounded-xl shadow-xl border">
+              {/* Placeholder for dashboard screenshot */}
+              <div className="bg-gray-100 rounded-lg h-80 flex items-center justify-center">
+                <span className="text-gray-400">Dashboard Preview</span>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        </section>
 
-        {/* Comment Trends */}
-        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <h2 className="font-semibold">Comment Trends</h2>
-          <LineChart width={300} height={200} data={dummyData.trends}>
-            <XAxis dataKey="day" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Line type="monotone" dataKey="comments" stroke="#4CAF50" />
-          </LineChart>
+        <section id="features" className="mt-24">
+          <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Real-time Analysis",
+                icon: <Icons.bolt className="h-6 w-6" />,
+                description: "Process comments and feedback as they come in",
+              },
+              {
+                title: "Multi-platform",
+                icon: <Icons.layers className="h-6 w-6" />,
+                description: "Supports Facebook, Twitter, Instagram and more",
+              },
+              {
+                title: "Role-based Access",
+                icon: <Icons.shield className="h-6 w-6" />,
+                description: "Secure access control for your team",
+              },
+            ].map((feature, index) => (
+              <Card key={index} className="hover:shadow-md transition-shadow">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
+                      {feature.icon}
+                    </div>
+                    <CardTitle>{feature.title}</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <footer className="bg-white border-t py-8 mt-12">
+        <div className="container mx-auto text-center text-sm text-muted-foreground">
+          © {new Date().getFullYear()} SocialSentinel. All rights reserved.
         </div>
-      </div>
+      </footer>
     </div>
   );
 }
