@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent FOUC for dark mode */
-@layer utilities {
-  .no-flash {
-    visibility: visible !important;
-  }
-}
-
 @layer components {
   .transition-slow {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);

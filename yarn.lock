@@ -954,6 +954,11 @@
   dependencies:
     csstype "^3.0.2"
 
+"@types/sentiment@^5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@types/sentiment/-/sentiment-5.0.4.tgz#68f5a4625ad61228977e65fc87805a24a962a255"
+  integrity sha512-6FL0CYijhnrR3gHbu7boAJn8zRCekJXBPfIHLkIgWbkY+hz5Dwfsq79FM7l/tLZKuEgQWktnzf6JqV2UCWKrbg==
+
 "@typescript-eslint/eslint-plugin@^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0":
   version "8.28.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.28.0.tgz#ad1465aa6fe7e937801c291648dec951c4dc38e6"

@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { FaUserCircle } from "react-icons/fa";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -16,9 +16,8 @@ import { Skeleton } from "@/components/shared/Loading/Skeleton";
 import { toast } from "sonner";
 import ThemeToggle from "@/components/shared/ThemeToggle";
 import { Analyzer } from "@/components/dashboard/Analyzer";
-import ToxicityIndicator from "@/components/dashboard/ToxicityIndicator";
 import { useAuth } from "@/context/AuthContext";
-import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { Avatar } from "@radix-ui/react-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -75,25 +74,25 @@ export default function DashboardPage() {
     );
   };
 
-  const fetchAIAnalysis = async () => {
-    try {
-      const response = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "summary",
-          comments: [], // You would pass actual comments here
-        }),
-      });
-      return await response.json();
-    } catch (error) {
-      console.error("Failed to fetch AI analysis:", error);
-      return null;
-    }
-  };
+  // const fetchAIAnalysis = async () => {
+  //   try {
+  //     const response = await fetch("/api/analyze", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         action: "summary",
+  //         comments: [], // You would pass actual comments here
+  //       }),
+  //     });
+  //     return await response.json();
+  //   } catch (error) {
+  //     console.error("Failed to fetch AI analysis:", error);
+  //     return null;
+  //   }
+  // };
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="flex flex-col gap-4 p-8">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">
@@ -277,48 +276,48 @@ export default function DashboardPage() {
   );
 }
 
-function AIAnalysis({ fetchAnalysis }: { fetchAnalysis: () => Promise<any> }) {
-  const [analysis, setAnalysis] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+// function AIAnalysis({ fetchAnalysis }: { fetchAnalysis: () => Promise<any> }) {
+//   const [analysis, setAnalysis] = useState<any>(null);
+//   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchAnalysis().then((data) => {
-      setAnalysis(data);
-      setLoading(false);
-    });
-  }, []);
+//   useEffect(() => {
+//     fetchAnalysis().then((data) => {
+//       setAnalysis(data);
+//       setLoading(false);
+//     });
+//   }, []);
 
-  if (loading) return <div>Loading analysis...</div>;
-  if (!analysis) return <div>Analysis unavailable</div>;
+//   if (loading) return <div>Loading analysis...</div>;
+//   if (!analysis) return <div>Analysis unavailable</div>;
 
-  return (
-    <div className="prose dark:prose-invert max-w-none">
-      <h3 className="text-lg font-medium">Overall Sentiment Summary</h3>
-      <p>{analysis.summary || "No summary available"}</p>
+//   return (
+//     <div className="prose dark:prose-invert max-w-none">
+//       <h3 className="text-lg font-medium">Overall Sentiment Summary</h3>
+//       <p>{analysis.summary || "No summary available"}</p>
 
-      <h3 className="text-lg font-medium mt-4">Key Positive Themes</h3>
-      <ul>
-        {analysis.positiveThemes?.map((theme: string) => (
-          <li key={theme}>{theme}</li>
-        ))}
-      </ul>
+//       <h3 className="text-lg font-medium mt-4">Key Positive Themes</h3>
+//       <ul>
+//         {analysis.positiveThemes?.map((theme: string) => (
+//           <li key={theme}>{theme}</li>
+//         ))}
+//       </ul>
 
-      <h3 className="text-lg font-medium mt-4">Key Negative Themes</h3>
-      <ul>
-        {analysis.negativeThemes?.map((theme: string) => (
-          <li key={theme}>{theme}</li>
-        ))}
-      </ul>
+//       <h3 className="text-lg font-medium mt-4">Key Negative Themes</h3>
+//       <ul>
+//         {analysis.negativeThemes?.map((theme: string) => (
+//           <li key={theme}>{theme}</li>
+//         ))}
+//       </ul>
 
-      <h3 className="text-lg font-medium mt-4">Recommendations</h3>
-      <ol>
-        {analysis.recommendations?.map((rec: string) => (
-          <li key={rec}>{rec}</li>
-        ))}
-      </ol>
-    </div>
-  );
-}
+//       <h3 className="text-lg font-medium mt-4">Recommendations</h3>
+//       <ol>
+//         {analysis.recommendations?.map((rec: string) => (
+//           <li key={rec}>{rec}</li>
+//         ))}
+//       </ol>
+//     </div>
+//   );
+// }
 
 // function AIAnalysis() {
 //   // In a real implementation, you would fetch AI analysis from your API

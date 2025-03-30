@@ -22,7 +22,7 @@ export default function SettingsPage() {
             <CardTitle>Access Denied</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>You don't have permission to view this page.</p>
+            <p>You dont have permission to view this page.</p>
           </CardContent>
         </Card>
       </div>

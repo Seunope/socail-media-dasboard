@@ -1,5 +1,4 @@
 import Sentiment from "sentiment";
-import { OpenAI } from "openai";
 
 // Configure sentiment analyzer with custom terms
 const sentiment = new Sentiment({

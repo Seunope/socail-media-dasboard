@@ -51,6 +51,7 @@
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "@types/react-tagcloud": "^2.3.2",
+    "@types/sentiment": "^5.0.4",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "lightningcss": "^1.29.3",

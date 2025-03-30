@@ -13,7 +13,7 @@ import {
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
-  const { setTheme, theme } = useTheme();
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);

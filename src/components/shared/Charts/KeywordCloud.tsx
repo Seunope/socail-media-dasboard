@@ -53,7 +53,7 @@ export default function KeywordCloud({
         tags={data}
         colorOptions={{ luminosity: "light" }}
         disableRandomColor={sentimentBased}
-        renderer={(tag, size, color) => (
+        renderer={(tag, size) => (
           <span
             key={tag.value}
             style={{

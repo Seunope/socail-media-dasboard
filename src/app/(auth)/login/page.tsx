@@ -10,7 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icons } from "@/components/ui/icons";
-import { FormField } from "@/components/ui/form-field";
 
 export default function LoginPage() {
   return (
@@ -52,7 +51,7 @@ export default function LoginPage() {
         </CardContent>
         <CardFooter>
           <p className="text-sm text-muted-foreground">
-            Don't have an account?{" "}
+            Dont have an account?{" "}
             <Link href="/signup" className="underline">
               Sign up
             </Link>

@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     },
   ];
 
-  const sentimentResults = analyzeSentimentBatch(
+  const sentimentResults = await analyzeSentimentBatch(
     mockComments.map((c) => c.text)
   );
 

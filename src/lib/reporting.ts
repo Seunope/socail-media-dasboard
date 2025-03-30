@@ -3,8 +3,8 @@ import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 export async function generatePdfReport(data: {
   title: string;
   period: string;
-  comments: any[];
-  sentiment: any;
+  comments: { text: string; platform: string; timestamp: string }[];
+  sentiment: { positive: number; neutral: number; negative: number };
   generatedAt: string;
 }) {
   // Create a new PDF document
@@ -91,7 +91,7 @@ export async function generatePdfReport(data: {
       if (yPosition < 50) {
         // Add new page if we run out of space
         yPosition = 750;
-        const newPage = pdfDoc.addPage([600, 800]);
+        // const newPage = pdfDoc.addPage([600, 800]);
         page.drawText("...continued", {
           x: 50,
           y: yPosition,

@@ -18,7 +18,7 @@ export function absoluteUrl(path: string) {
   return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
 }
 
-export function jsonToCsv(data: any[]): string {
+export function jsonToCsv(data: Record<string, unknown>[]): string {
   if (data.length === 0) return "";
 
   // Get headers

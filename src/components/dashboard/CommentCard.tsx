@@ -17,7 +17,6 @@ interface CommentCardProps {
 }
 
 export function CommentCard({
-  id,
   username,
   avatar,
   content,

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { analyzeSentiment } from "@/lib/sentiment";
 import { formatDistanceToNow } from "date-fns";
 import { Icons } from "@/components/ui/icons";
 

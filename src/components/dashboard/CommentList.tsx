@@ -1,10 +1,19 @@
 import { CommentCard } from "./CommentCard";
-import { ScrollArea } from "@/components/ui/scroll-area";
+// import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/shared/Loading/Skeleton";
-import { analyzeSentiment } from "@/lib/sentiment";
+// import { analyzeSentiment } from "@/lib/sentiment";
 
 // Mock data - in a real app this would come from an API
-const mockComments = [
+const mockComments: Array<{
+  id: string;
+  username: string;
+  avatar: string;
+  content: string;
+  timestamp: Date;
+  likes: number;
+  platform: "facebook" | "instagram" | "twitter";
+  sentimentScore: number;
+}> = [
   {
     id: "1",
     username: "Alex Johnson",
