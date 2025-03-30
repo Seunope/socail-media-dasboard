@@ -38,16 +38,18 @@ export default function LoginPage() {
               </span>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-6">
-            <Button variant="outline">
-              <Icons.google className="mr-2 h-4 w-4" />
-              Google
-            </Button>
-            <Button variant="outline">
-              <Icons.github className="mr-2 h-4 w-4" />
-              GitHub
-            </Button>
-          </div>
+          <Link href="/dashboard">
+            <div className="grid grid-cols-2 gap-6">
+              <Button variant="outline">
+                <Icons.facebook className="mr-2 h-4 w-4" />
+                Facebook
+              </Button>
+              <Button variant="outline">
+                <Icons.instagram className="mr-2 h-4 w-4" />
+                Instagram
+              </Button>
+            </div>
+          </Link>
         </CardContent>
         <CardFooter>
           <p className="text-sm text-muted-foreground">
